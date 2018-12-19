@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import com.cg.hotelMenu.bean.Customer;
 import com.cg.hotelMenu.bean.Dish;
 import com.cg.hotelMenu.exception.HotelMenuException;
@@ -16,13 +19,16 @@ public class HotelMenuMain {
 	static Scanner sc = new Scanner(System.in);
 	static IHotelMenuService HotelMenuService = null;
 	static HotelMenuServiceImpl hotelMenuServiceImpl = null;
+	static Logger logger = Logger.getRootLogger();
 
 	public static void main(String[] args) throws HotelMenuException {
+		PropertyConfigurator.configure("resources//log4j.properties");
 		Customer customer = null;
 		Dish dish = null;
 		String dishName = null;
 		String customerId = null;
 		String customerName = null;
+		
 		int option = 0;
 		while (true) {
 			System.out.println();
@@ -50,6 +56,8 @@ public class HotelMenuMain {
 						HotelMenuService = new HotelMenuServiceImpl();
 						dishName = HotelMenuService.addDish(dish);
 						System.out.println(dish);
+					
+						
 					} finally {
 						dishName = null;
 						HotelMenuService = null;
@@ -161,6 +169,10 @@ public class HotelMenuMain {
 			}
 		}
 	}
+	/*
+	 * This function will be called by main and will return  validated Customer Details
+	 * object OR null if details are invalid
+	 */
 
 	private static Customer populateCustomer() {
 		Customer customer = new Customer();
@@ -179,15 +191,18 @@ public class HotelMenuMain {
 				return null;
 			}
 
-		} catch (HotelMenuException h) {
-			System.err.println("Invalid data:");
-			System.err.println(h.getMessage() + "\n Try again..");
+		} catch (HotelMenuException hotelMenuException) {
+			logger.error("exception occured", hotelMenuException);
+			System.err.println(hotelMenuException.getMessage() + "\n Try again..");
 		}
 		System.exit(0);
 
 		return customer;
 	}
-
+	/*
+	 * This function will be called by main and will return  validated Dish Details
+	 * object OR null if details are invalid
+	 */
 	private static Dish populateDish() {
 		Dish dish = new Dish();
 		System.out.println("Enter the details");
@@ -205,9 +220,9 @@ public class HotelMenuMain {
 				return null;
 			}
 
-		} catch (HotelMenuException h) {
-			System.err.println("Invalid data:");
-			System.err.println(h.getMessage() + "\n Try again..");
+		}  catch (HotelMenuException hotelMenuException) {
+			logger.error("exception occured", hotelMenuException);
+			System.err.println(hotelMenuException.getMessage() + "\n Try again..");
 		}
 		System.exit(0);
 

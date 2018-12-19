@@ -9,7 +9,7 @@ import com.cg.hotelMenu.bean.Dish;
 import com.cg.hotelMenu.exception.HotelMenuException;
 
 public interface IHotelMenuService {
-	public String addDish(Dish dish) throws ClassNotFoundException, IOException, SQLException;
+	public String addDish(Dish dish) throws ClassNotFoundException, IOException, SQLException, HotelMenuException;
 
 	public Dish viewDishDetails(String dishName) throws ClassNotFoundException, IOException, SQLException;
 
@@ -18,7 +18,7 @@ public interface IHotelMenuService {
 
 	public List retriveAll() throws ClassNotFoundException, IOException, SQLException;
 
-	public String addCustomerDetails(Customer customer) throws ClassNotFoundException, IOException, SQLException;
+	public String addCustomerDetails(Customer customer) throws ClassNotFoundException, IOException, SQLException, HotelMenuException;
 
 	public boolean roomStaus() throws ClassNotFoundException, IOException, SQLException;
 

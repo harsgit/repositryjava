@@ -18,7 +18,7 @@ public class HotelMenuServiceImpl implements IHotelMenuService {
 	IHotelMenuDao HotelMenudao = new HotelMenuDaoImpl();
 
 	@Override
-	public String addDish(Dish dish) throws ClassNotFoundException, IOException, SQLException {
+	public String addDish(Dish dish) throws ClassNotFoundException, IOException, SQLException, HotelMenuException {
 		// TODO Auto-generated method stub
 
 		String dishName;
@@ -45,7 +45,7 @@ public class HotelMenuServiceImpl implements IHotelMenuService {
 			throws ClassNotFoundException, IOException, SQLException, HotelMenuException {
 		Dish dish = null;
 		dish = HotelMenudao.updateDetails(disPrice, dishName);
-		// System.out.println(dish);
+ //System.out.println(dish);
 		return dish;
 	}
 
@@ -58,7 +58,7 @@ public class HotelMenuServiceImpl implements IHotelMenuService {
 	}
 
 	@Override
-	public String addCustomerDetails(Customer customer) throws ClassNotFoundException, IOException, SQLException {
+	public String addCustomerDetails(Customer customer) throws ClassNotFoundException, IOException, SQLException, HotelMenuException {
 		// TODO Auto-generated method stub
 		String customerId;
 		customerId = HotelMenudao.addCustomerDetails(customer);
